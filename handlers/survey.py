@@ -13,14 +13,14 @@ async def start_survey(message: types.Message):
 
     await bot.send_message(message.from_user.id, text=question, reply_markup=keyboard)
 
-def handle_survey_response(callback_query: types.CallbackQuery):
+async def handle_survey_response(callback_query: types.CallbackQuery):
     selected_option = callback_query.data.split("_")[1]
     user_id = callback_query.from_user.id
 
     # Здесь можно обработать ответ пользователя, например, записать его в базу данных
     record_survey_response(user_id, selected_option)
 
-    await callback_query.answer(f"Вы выбрали: {selected_option}")
+    await callback_query.answer(text=f"Вы выбрали: {selected_option}")
 
 def register_handlers(dp: Dispatcher):
     dp.register_message_handler(start_survey, commands=['survey'])

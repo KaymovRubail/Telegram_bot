@@ -1,27 +1,38 @@
+# db_module.py
+
 import sqlite3
 
-def init_database():
-    conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
+def create_table():
+    connection = sqlite3.connect('your_database_name.db')
+    cursor = connection.cursor()
+
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY,
-            user_id INTEGER,
+            user_id INTEGER PRIMARY KEY,
             username TEXT,
             first_name TEXT,
             last_name TEXT
         )
     ''')
-    conn.commit()
-    conn.close()
+
+    connection.commit()
+    connection.close()
 
 def insert_user(user_data):
-    conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
-    cursor.execute('INSERT INTO users (user_id, username, first_name, last_name) VALUES (?, ?, ?, ?)', user_data)
-    conn.commit()
-    conn.close()
+    connection = sqlite3.connect('your_database_name.db')
+    cursor = connection.cursor()
 
-def record_survey_response(user_id, response):
-    # Здесь реализуйте логику записи ответа в базу данных
-    pass
+    cursor.execute('INSERT INTO users (user_id, username, first_name, last_name) VALUES (?, ?, ?, ?)', user_data)
+
+    connection.commit()
+    connection.close()
+
+def record_survey_response(user_id, selected_option):
+    connection = sqlite3.connect('your_database_name.db')
+    cursor = connection.cursor()
+
+    # Здесь реализуйте логику записи ответа на опрос в базу данных
+    # cursor.execute('INSERT INTO survey_responses (user_id, selected_option) VALUES (?, ?)', (user_id, selected_option))
+
+    connection.commit()
+    connection.close()
