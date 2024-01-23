@@ -17,7 +17,5 @@ async def handle_survey_response(callback_query: types.CallbackQuery):
     selected_option = callback_query.data.split("_")[1]
     user_id = callback_query.from_user.id
 
-    # Обработка ответа пользователя, например, запись в базу данных
-    # ...
 
     await callback_query.answer(f"Вы выбрали: {selected_option}")

@@ -14,3 +14,13 @@ async def handle_start_command(message: types.Message):
     insert_user(user_data)
 
     await message.reply("Привет! Ты нажал /start")
+# handlers/start.py
+
+from aiogram import types
+from aiogram.dispatcher import Dispatcher
+
+async def start_command_handler(message: types.Message):
+    await message.answer("Привет! Это ваше приветственное сообщение.")
+
+def register_handlers(dp: Dispatcher):
+    dp.register_message_handler(start_command_handler, commands=['start'])
